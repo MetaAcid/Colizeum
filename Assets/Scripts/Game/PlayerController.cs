@@ -6,7 +6,10 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    const float STRONG_JUMP_MULTIPLIER = 1.1f;
     public Animator anim;
+    [SerializeField]
+    private StaminaManager staminaManager;
     public Image healthBar;
     public int playerHealth;
     private int _state;
@@ -37,9 +40,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && staminaManager.HasStamina())
             {
-                OnPlayerRun?.Invoke();
+                staminaManager.UseStaminaToRun();
                 _state = 2;
                 transform.localPosition += transform.forward * maxSpeed * Time.deltaTime;
             }
@@ -76,18 +79,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (ground == true)
+            if (ground == true && staminaManager.HasStamina())
             {
-                OnPlayerJump?.Invoke();
                 if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
                 {
                     _state = 7;
-                    rb.AddForce(transform.up * jumpPower * 1.1f);
+                    rb.AddForce(transform.up * jumpPower * STRONG_JUMP_MULTIPLIER);
+                    staminaManager.UseStaminaToJump(STRONG_JUMP_MULTIPLIER);
                 }
                 else
                 {
                     _state = 5;
                     rb.AddForce(transform.up * jumpPower);
+                    staminaManager.UseStaminaToJump();
                 }
             }
         }

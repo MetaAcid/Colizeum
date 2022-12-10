@@ -191,6 +191,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &54702389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1199569403, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+  m_PrefabInstance: {fileID: 199740490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0617794a372844f87beb566d80b8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &56123144
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +408,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2081618258}
+    - target: {fileID: 364747514, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: staminaManager
+      value: 
+      objectReference: {fileID: 54702389}
     - target: {fileID: 364747515, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: item
       value: 
@@ -405,6 +420,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 425287721}
+    - target: {fileID: 1199569403, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: baseJumpCost
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_RootOrder
       value: 2

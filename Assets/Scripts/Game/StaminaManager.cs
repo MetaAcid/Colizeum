@@ -12,7 +12,7 @@ public class StaminaManager : MonoBehaviour
     [Header("Stamina usage (in stamina bar percentage)")]
     [Range(0, 1)]
     [SerializeField]
-    private float jumpCost;
+    private float baseJumpCost;
     [Range(0, 1)]
     [SerializeField]
     private float runPerSecondCost;
@@ -23,29 +23,13 @@ public class StaminaManager : MonoBehaviour
     [SerializeField]
     private float regenPerSecond;
 
-
-    private PlayerController playerController;
-
     private float currentStamina;
     private float staminaNotUsedTimer = 0f;
 
     void Awake()
     {
-        playerController = transform.parent.gameObject.GetComponent<PlayerController>();
         currentStamina = MAX_STAMINA;
         UpdateStaminaBar();
-    }
-
-    private void OnEnable()
-    {
-        playerController.OnPlayerJump += UseStaminaToJump;
-        playerController.OnPlayerRun += UseStaminaToRun;
-    }
-
-    private void OnDisable()
-    {
-        playerController.OnPlayerJump -= UseStaminaToJump;
-        playerController.OnPlayerRun -= UseStaminaToRun;
     }
 
     void Update()
@@ -67,11 +51,13 @@ public class StaminaManager : MonoBehaviour
 
         staminaNotUsedTimer = 0;
 
-        if (currentStamina - amount >= 0)
+        currentStamina -= amount;
+        if (currentStamina < 0)
         {
-            currentStamina -= amount;
-            UpdateStaminaBar();
+            currentStamina = 0;
         }
+
+        UpdateStaminaBar();
     }
 
     private void RegenStamina()
@@ -98,14 +84,20 @@ public class StaminaManager : MonoBehaviour
         return true;
     }
 
-    private void UseStaminaToJump()
+    public void UseStaminaToJump(float jumpMultiplier = 1.0f)
     {
+        float jumpCost = baseJumpCost * jumpMultiplier;
         UseStamina(jumpCost);
     }
 
-    private void UseStaminaToRun()
+    public void UseStaminaToRun()
     {
         float runPerFrameCost = runPerSecondCost * Time.deltaTime;
         UseStamina(runPerFrameCost);
+    }
+
+    public bool HasStamina()
+    {
+        return currentStamina > 0;
     }
 }
