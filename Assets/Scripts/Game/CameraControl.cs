@@ -1,30 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    [SerializeField]
+    private Transform player;
+    [SerializeField]
+    private float sensitivityMouse = 200f;
+    [SerializeField]
+    [Range(-90, 90)]
+    private float minAngle;
+    [SerializeField]
+    [Range(-90, 90)]
+    private float maxAngle;
+    [ExecuteInEditMode]
+    void OnValidate()
+    {
+        maxAngle = Mathf.Clamp(maxAngle, minAngle, 90);
+    }
     private float mouseX;
     private float mouseY;
+    private float rotationAroundX = 0f;
 
-    public float sensitivityMouse = 200f;
-
-    public Transform Player;
-
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
         mouseX = Input.GetAxis("Mouse X") * sensitivityMouse * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * sensitivityMouse * Time.deltaTime;
 
-        Player.Rotate(mouseX * new Vector3(0, 1, 0));
+        rotationAroundX -= mouseY;
+        rotationAroundX = Mathf.Clamp(rotationAroundX, minAngle, maxAngle);
 
-        transform.Rotate(-mouseY * new Vector3(1, 0, 0));
+        transform.localRotation = Quaternion.Euler(rotationAroundX, 0f, 0f);
+        player.Rotate(mouseX * Vector3.up);
     }
 }
