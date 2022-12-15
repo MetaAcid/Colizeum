@@ -11,5 +11,7 @@ namespace Common
             yield return new WaitForSeconds(time);
             action.Invoke();
         }
+
+        public static int GetPercentage(float value, float maxValue) => Mathf.RoundToInt(value / maxValue * 100);
     }
 }

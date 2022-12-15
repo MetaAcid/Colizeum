@@ -18,7 +18,7 @@ namespace Entities.Weapons
         protected override void OnValidate()
         {
             base.OnValidate();
-            itemType = ItemType.Wearable;
+            itemType = ItemType.Weapon;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Entities
 {
     public enum ItemType
     {
-        Wearable,
+        Weapon,
         Boostable
     }
     
