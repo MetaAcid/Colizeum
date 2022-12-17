@@ -11,14 +11,14 @@ public class CameraControl : MonoBehaviour
     private float sensitivityMouse = 200f;
     [SerializeField]
     [Range(-90, 90)]
-    private float minAngle;
+    private float minRotationX;
     [SerializeField]
     [Range(-90, 90)]
-    private float maxAngle;
+    private float maxRotationX;
     [ExecuteInEditMode]
     void OnValidate()
     {
-        maxAngle = Mathf.Clamp(maxAngle, minAngle, 90);
+        maxRotationX = Mathf.Clamp(maxRotationX, minRotationX, 90);
     }
     private float mouseX;
     private float mouseY;
@@ -35,7 +35,7 @@ public class CameraControl : MonoBehaviour
         mouseY = Input.GetAxis("Mouse Y") * sensitivityMouse * Time.deltaTime;
 
         rotationAroundX -= mouseY;
-        rotationAroundX = Mathf.Clamp(rotationAroundX, minAngle, maxAngle);
+        rotationAroundX = Mathf.Clamp(rotationAroundX, minRotationX, maxRotationX);
 
         transform.localRotation = Quaternion.Euler(rotationAroundX, 0f, 0f);
         player.Rotate(mouseX * Vector3.up);

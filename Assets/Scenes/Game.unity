@@ -421,6 +421,14 @@ PrefabInstance:
       propertyPath: minAngle
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 1739328029, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: maxRotationX
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739328029, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: minRotationX
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 1739328032, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_IsLocked
       value: 1
