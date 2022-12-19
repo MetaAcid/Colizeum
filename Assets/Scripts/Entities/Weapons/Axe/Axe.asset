@@ -15,4 +15,7 @@ MonoBehaviour:
   id: Axe
   itemName: Axe
   worldModel: {fileID: 9097180640304363204, guid: c87f53c25c6d4044cb5af1de7a0919a2, type: 3}
-  damage: 5
+  damage: 10
+  attackDelay: 1
+  attackDuration: 2
+  attackRange: 4

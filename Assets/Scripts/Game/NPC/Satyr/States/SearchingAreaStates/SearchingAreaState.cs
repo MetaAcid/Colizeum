@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.NPC.States.SearchingAreaStates
 {
-    public class SearchingAreaState : EnemyState
+    public class SearchingAreaState : SatyrState
     {
         private readonly float _stopDistanceToItem;
         
@@ -30,7 +30,7 @@ namespace Game.NPC.States.SearchingAreaStates
             
             StateMachine.SetDestination(nearestItem.SpawnedItem.transform.position, _stopDistanceToItem,() =>
             {
-                nearestItem.PickedUp(Enemy);
+                nearestItem.PickedUp(Satyr);
                 StateMachine.SetState(StateMachine.AttackState);
             });
         }

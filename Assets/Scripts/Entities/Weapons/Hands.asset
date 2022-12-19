@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Hands
   m_EditorClassIdentifier: 
   id: Hands
-  itemName: Hdans
+  itemName: Hands
   worldModel: {fileID: 0}
-  damage: 1
-  attackDelay: 1
-  attackDuration: 2
-  attackRange: 1.5
+  damage: 30
+  attackDelay: 10
+  attackDuration: 4
+  attackRange: 5

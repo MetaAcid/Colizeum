@@ -63,10 +63,10 @@ namespace Entities
         public WorldItem FindNearestItem(Vector3 selfPosition, ItemType itemType)
         {
             ItemDestination itemDestination = new ItemDestination(float.MaxValue, null);
+            Debug.Log(WorldItems.Length);
             foreach (var item in WorldItems)
             {
                 float itemDistance = Vector3.Distance(selfPosition, item.SpawnedItem.transform.position);
-
                 if (itemDestination.Distance < itemDistance || item.ItemDataSO.ItemType != itemType) continue;
                 
                 itemDestination.Distance = itemDistance;

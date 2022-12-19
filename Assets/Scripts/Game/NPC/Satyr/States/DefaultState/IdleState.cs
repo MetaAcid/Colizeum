@@ -1,6 +1,6 @@
 ﻿namespace NPC.States.DefaultState
 {
-    public class IdleState : EnemyState
+    public class IdleState : SatyrState
     {
         public override void Enter()
         {

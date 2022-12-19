@@ -19,7 +19,7 @@ namespace Game.NPC.States.SearchingAreaStates
         {
             OnProcess += () =>
             {
-                if (!Enemy.IsSaveDistance())
+                if (!Satyr.IsSaveDistance())
                 {
                     StateMachine.SetState(StateMachine.FearState);
                 }

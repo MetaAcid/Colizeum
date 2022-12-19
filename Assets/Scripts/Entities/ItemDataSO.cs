@@ -5,7 +5,8 @@ namespace Entities
     public enum ItemType
     {
         Weapon,
-        Boostable
+        Boostable,
+        Shield
     }
     
     public class ItemDataSO : ScriptableObject

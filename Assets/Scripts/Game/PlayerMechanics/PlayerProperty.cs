@@ -1,4 +1,7 @@
-﻿namespace Game.User
+﻿using System;
+using UnityEngine;
+
+namespace Game.User
 {
     public class PlayerProperty
     {
@@ -25,7 +28,6 @@
             {
                 _value = value;
                 if (_value > _maxValue) _value = _maxValue;
-                
                 OnValueChange?.Invoke();
                 if (_value <= 0) OnZeroValue?.Invoke();
             }

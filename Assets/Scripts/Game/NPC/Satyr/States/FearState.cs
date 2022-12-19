@@ -16,7 +16,7 @@ namespace NPC.States
         }
     }
     
-    public class FearState : EnemyState
+    public class FearState : SatyrState
     {
         private Transform[] _areaPoints;
 
@@ -27,7 +27,7 @@ namespace NPC.States
         
         public override void Process()
         {
-            if (Enemy.IsSaveDistance())
+            if (Satyr.IsSaveDistance())
             {
                 StateMachine.SetState(StateMachine.SearchingBoostState);
                 return;

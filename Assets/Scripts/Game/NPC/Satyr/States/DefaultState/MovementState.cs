@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NPC.States.DefaultState
 {
-    public class MovementState : EnemyState
+    public class MovementState : SatyrState
     {
         private float _distanceToFinish = 1f;
         private Vector3 _destination;
@@ -29,7 +29,7 @@ namespace NPC.States.DefaultState
             _destination = value;
             _distanceToFinish = distanceToFinish;
             OnFinishMovement = null;
-            OnFinishMovement += () => _destination = Enemy.transform.position;
+            OnFinishMovement += () => _destination = Satyr.transform.position;
         }
 
         private bool IsFinish()

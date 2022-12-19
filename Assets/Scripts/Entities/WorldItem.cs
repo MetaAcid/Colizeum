@@ -9,20 +9,10 @@ namespace Entities
         [SerializeField] private ItemDataSO itemDataSO;
 
         public ItemDataSO ItemDataSO => itemDataSO;
-        public GameObject SpawnedItem { get; protected set; }
+        public GameObject SpawnedItem => gameObject;
         
         protected virtual void Awake()
         {
-            SpawnItem();
-        }
-
-        protected void SpawnItem()
-        {
-            SpawnedItem = Instantiate(
-                itemDataSO.WorldModel, 
-                transform.position,
-                itemDataSO.WorldModel.transform.rotation);
-            
             ItemsManager.Instance.AddWorldItem(this);
         }
 

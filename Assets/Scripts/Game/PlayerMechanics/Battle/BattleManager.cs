@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using Common;
 using Entities.Weapons;
+using Game.NPC;
+using Game.NPC.Cyclope;
+using Game.NPC.Harpy;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace Game.PlayerMechanics.Battle
 {
     public class BattleManager : MonoBehaviour
     {
-        [SerializeField] private float timer;
+        [SerializeField] private float handsAnimationTimer;
         [SerializeField] private int handAttackState;
+        [SerializeField] private Transform attackPoint;
         
         public Animator animator;
 
@@ -21,18 +26,15 @@ namespace Game.PlayerMechanics.Battle
         
         public void AttackWithHands()
         {
-            if(Input.GetMouseButtonUp(0))
+            if (handsAnimationTimer <= 0.01f)
             {
-                if (timer <= 0.01f)
+                if (handAttackState != 2)
                 {
-                    if (handAttackState != 2)
-                    {
-                        handAttackState += 1;
-                    }
-                    else
-                    {
-                        handAttackState = 1;
-                    }
+                    handAttackState += 1;
+                }
+                else
+                {
+                    handAttackState = 1;
                 }
             }
 
@@ -44,26 +46,57 @@ namespace Game.PlayerMechanics.Battle
 
         public void AttackWithWeapon(WeaponDataSO weaponDataSO)
         {
-            if (Input.GetMouseButtonUp(0))
-            {
-                animator.SetTrigger(AnimationsConfig.AnimationAttackWeapon);
-            }
+            animator.SetTrigger(AnimationsConfig.AnimationAttackWeapon);
+            Attack(weaponDataSO);
         }
 
-        public void BlockWithShield(WeaponDataSO weaponDataSO)
+        public void SetBlockShieldStatus(bool isBlocked)
         {
-            if (Input.GetMouseButtonUp(1))
+            Player.Instance.IsBlocking = isBlocked;
+            
+            if (isBlocked)
             {
                 animator.SetTrigger(AnimationsConfig.AnimationBlock);
+                Debug.Log("Block!");
+                return;
+            }    
+            
+            Debug.Log("Unblock");
+        }
+        
+        public void BlockWithShield(WeaponDataSO weaponDataSO)
+        {
+        }
+
+        private void Attack(WeaponDataSO weapon)
+        {
+            Collider[] colliders = Physics.OverlapSphere(
+                attackPoint.position, 
+                weapon.AttackRange);
+
+            foreach (var col in colliders)
+            {
+                if (col.GetComponent<Satyr>())
+                {
+                    col.GetComponent<Satyr>().HealthProperty.Value -= weapon.Damage;
+                }
+                else if (col.GetComponent<Cyclope>())
+                {
+                    col.GetComponent<Cyclope>().HealthProperty.Value -= weapon.Damage;
+                }
+                else if (col.GetComponent<Harpy>())
+                {
+                    col.GetComponent<Harpy>().HealthProperty.Value -= weapon.Damage;
+                }
             }
         }
         
         IEnumerator TimerAttack(float time)
         {
-            timer += Time.deltaTime;
-            if (timer>=time && timer != 0)
+            handsAnimationTimer += Time.deltaTime;
+            if (handsAnimationTimer>=time && handsAnimationTimer != 0)
             {
-                timer = 0;
+                handsAnimationTimer = 0;
                 animator.SetInteger(AnimationsConfig.AnimationAttackHands, 0);
                 yield return null;
             }

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: Bow
   itemName: Bow
   worldModel: {fileID: 4591695674059600220, guid: 754a56863e31f7d4c90c7b5f32b118c6, type: 3}
-  damage: 5
+  damage: 10
   attackDelay: 1
   attackDuration: 0.5
   attackRange: 1.5
